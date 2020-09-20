@@ -14,10 +14,13 @@ app.use(sessionMiddleware);
 
 app.use(express.json());
 
-var healthCheck = require('./routes/health-check');
-
-// Import health-check routes into the path '/health-check'
+// health-check routes
+const healthCheck = require('./routes/health-check');
 app.use('/api/health-check', healthCheck);
+
+// user routes
+const user = require('./routes/user');
+app.use('/api/user', user);
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
