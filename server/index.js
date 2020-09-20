@@ -22,6 +22,14 @@ app.use('/api/health-check', healthCheck);
 const user = require('./routes/user');
 app.use('/api/user', user);
 
+// games routes
+const games = require('./routes/games');
+app.use('/api/games', games);
+
+app.use('/api', (req, res, next) => {
+  next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
