@@ -1,6 +1,7 @@
 require('dotenv/config');
 const express = require('express');
 
+// eslint-disable-next-line
 const db = require('./database');
 const ClientError = require('./client-error');
 const staticMiddleware = require('./static-middleware');
@@ -13,11 +14,10 @@ app.use(sessionMiddleware);
 
 app.use(express.json());
 
-app.get('/api/health-check', (req, res, next) => {
-  db.query('select \'successfully connected\' as "message"')
-    .then(result => res.json(result.rows[0]))
-    .catch(err => next(err));
-});
+var healthCheck = require('./routes/health-check');
+
+// Import health-check routes into the path '/health-check'
+app.use('/api/health-check', healthCheck);
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));

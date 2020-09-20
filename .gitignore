@@ -2,6 +2,6 @@
 .idea
 .vscode
 .DS_Store
-node_modules
 server/sessions/*.json
 server/public/main.js*
+node_modules
