@@ -22,6 +22,10 @@ app.use('/api/health-check', healthCheck);
 const user = require('./routes/user');
 app.use('/api/user', user);
 
+// teams routes
+const teams = require('./routes/teams');
+app.use('/api/teams', teams);
+
 // games routes
 const games = require('./routes/games');
 app.use('/api/games', games);
